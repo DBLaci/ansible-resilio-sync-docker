@@ -1,0 +1,7 @@
+---
+
+- name: Restart resilio-sync docker container
+  listen: Restart resilio-sync
+  docker_container:
+    name: "resilio-sync"
+    restart: yes

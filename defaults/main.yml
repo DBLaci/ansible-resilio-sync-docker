@@ -1,0 +1,23 @@
+---
+
+resilio_sync_port: 44444
+resilio_sync_home_dir: "/root"
+
+resilio_sync_config_path: "{{ resilio_sync_home_dir }}/rslsync"
+
+resilio_sync_postfix: "backup"
+
+resilio_sync_shared_folders: []
+  # "secret": "AVGC3CYGFJREGGGZ3QM6EBWNQD7HI23123"
+  # "dir": "{{ resilio_sync_home_dir }}/Shared/percona"
+  # "use_relay_server": false
+  # "use_tracker": false
+  # "search_lan": false
+  # "use_sync_trash": false
+  # "overwrite_changes": false
+  # "selective_sync": false
+  # "known_hosts":
+  #   - "{{ backup_server_ip }}:44444"
+
+resilio_sync_user: root
+resilio_sync_group: root

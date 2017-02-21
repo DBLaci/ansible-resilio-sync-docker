@@ -1,0 +1,13 @@
+---
+
+# - name: Create dirs
+#   file:
+#     path: "{{ item }}"
+#     state: directory
+#     owner: "{{ resilio_sync_user }}"
+#     group: "{{ resilio_sync_group }}"
+#     mode: 0770
+#   with_items:
+#     - "{{ resilio_sync_config_path }}"
+#     - "{{ resilio_sync_config_path }}/Storage"
+

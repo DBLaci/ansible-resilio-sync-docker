@@ -1,0 +1,23 @@
+---
+- name: Setup config json
+  copy:
+    content: "{{ resilio_sync_config | to_nice_json }}"
+    dest: "/etc/resilio-sync-docker-config.json"
+  notify: "Restart resilio-sync"
+
+- name: 'Start the Resilio-sync docker container'
+  docker_container:
+    image: "resilio/sync"
+    name: "resilio-sync"
+    state: 'started'
+    restart_policy: 'always'
+    log_driver: 'syslog'
+    log_options:
+      tag: "resilio-sync"
+    volumes:
+      - "/home/backup/Shared/monitoring:/home/backup/Shared/monitoring"
+      - "/etc/resilio-sync-docker-config.json:/mnt/sync/sync.conf"
+    ports:
+#      - "127.0.0.1:8000:80"
+      - "{{ resilio_sync_port }}:55555"
+  notify: Restart resilio-sync
