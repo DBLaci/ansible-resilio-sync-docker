@@ -1,9 +1,24 @@
 ---
+
+- include: setup_folders.yml
+
 - name: Setup config json
   copy:
     content: "{{ resilio_sync_config | to_nice_json }}"
     dest: "/etc/resilio-sync-docker-config.json"
   notify: "Restart resilio-sync"
+
+# collect Shared folders to mount
+- name: Calculate Volume
+  set_fact:
+    tmp_resilio_sync_docker_volumes:
+       - "/etc/resilio-sync-docker-config.json:/mnt/sync/sync.conf"
+
+- name: Append volumes
+  set_fact:
+    tmp_resilio_sync_docker_volumes: "{{ tmp_resilio_sync_docker_volumes }} + [ '{{ resilio_sync_home_dir }}{{ item.dir }}:{{ item.dir }}' ]"
+  with_items: "{{ resilio_sync_shared_folders }}"
+
 
 - name: 'Start the Resilio-sync docker container'
   docker_container:
@@ -14,9 +29,8 @@
     log_driver: 'syslog'
     log_options:
       tag: "resilio-sync"
-    volumes:
-      - "/home/backup/Shared/monitoring:/home/backup/Shared/monitoring"
-      - "/etc/resilio-sync-docker-config.json:/mnt/sync/sync.conf"
+    volumes: "{{ tmp_resilio_sync_docker_volumes }}"
+#      - "{{ resilio_sync_home_dir }}/DB:/Shared/DB"
     ports:
 #      - "127.0.0.1:8000:80"
       - "{{ resilio_sync_port }}:55555"
