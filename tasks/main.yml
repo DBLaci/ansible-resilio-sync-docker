@@ -1,6 +1,6 @@
 ---
 
-- include: setup_folders.yml
+- import_tasks: setup_folders.yml
 
 - name: Setup config json
   copy:
