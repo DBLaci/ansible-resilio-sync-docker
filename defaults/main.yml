@@ -8,7 +8,7 @@ resilio_sync_device_name: "backup"
 resilio_sync_shared_folders: []
 # this is an example
 #   - secret: "AVGC3CYGFJREGGGZ3QM6EBWNQD7HI23123" # use rslsync --generate-secret to get one. Use this on every host to sync
-#     dir: "/Shared/folder1"
+#     dir: "/Shared/folder1" # absolute path. This will be prepended by resilio_sync_home_dir on the host. For example on the host it will be: /root/Shared/folder1
 #     use_relay_server: false
 #     use_tracker: false
 #     search_lan: false

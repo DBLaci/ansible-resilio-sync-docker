@@ -1,7 +1,11 @@
 Role Name
 =========
 
-A brief description of the role goes here.
+Deploy Resilio Sync (rslsync / btsync) as Docker service.
+
+This role deploys a basic config, all tracker/upnp etc. disabled. We assume `known_hosts` are set.
+
+The directories will be created on the host.
 
 Requirements
 ------------
@@ -11,7 +15,12 @@ Any pre-requisites that may not be covered by Ansible itself or the role should 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+Set `resilio_sync_shared_folders` to a list, see example in defaults/vars.yml
+
+Set `resilio_sync_home_dir` to an absolute path on the server. This will be the base path for the directories set in the `dir` variable in the folder config.
+
+known_hosts has to be set to at least one common server ip for rslsync to work as trackers are disabled in the role.
+
 
 Dependencies
 ------------
@@ -25,7 +34,7 @@ Including an example of how to use your role (for instance, with variables passe
 
     - hosts: servers
       roles:
-         - { role: username.rolename, x: 42 }
+         - { role: ansible-resilio-sync-docker }
 
 License
 -------

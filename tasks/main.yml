@@ -26,9 +26,9 @@
     name: "resilio-sync"
     state: 'started'
     restart_policy: 'always'
-    log_driver: 'syslog'
-    log_options:
-      tag: "resilio-sync"
+#    log_driver: 'syslog'
+#    log_options:
+#      tag: "resilio-sync"
     volumes: "{{ tmp_resilio_sync_docker_volumes }}"
 #      - "{{ resilio_sync_home_dir }}/DB:/Shared/DB"
     ports:
